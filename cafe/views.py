@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 from django.contrib.auth import logout, authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.comments import Comment
@@ -71,7 +72,7 @@ def login(request):
     data = {}
     data['response'] = request.GET["openid.claimed_id"]
     data['id'] = request.GET["openid.claimed_id"][36:]
-    data['url'] = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=26EB49CEF46060BD61433835AF112451&steamids="+data['id']
+    data['url'] = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+settings.STEAM_API_KEY+"&steamids="+data['id']
 
     claim = data['response']
 
