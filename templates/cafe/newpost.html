@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% load post_filters %}
+{% load tagging_tags %}
+
+{% block head %}{{ form.media }}{% endblock head %}
+
+{% load comments %}
+
+{% block navbar %}{% if perms.news.add_newspost and not cat and not tag %}<div class="nav"><a href="#" id="postlink" class="navblip" title="Make a Post! Show them all!">+ post</a></div>{% endif %}{% endblock navbar %}
+
+{% block content %}
+<div id="news">
+        <div id="newpost" class="post" style="display:none;">
+            <form action="newpost/" method="post">{% csrf_token %}
+                <label for="id_title">Title:</label> {{ form.title }}
+                <br>
+                <br>
+                {{ form.body }}<br>
+                <div class="posthints">
+                    <ul>
+                        <li>If you have a long post, put &lt;!--more--&gt; in the Source.</li>
+                        <li>Max width is 750x, but you only have ~740px to play with.</li>
+                        <li>Don't steal shit. Reblog and source. SOURCE YOUR SHIT.</li>
+                    </ul>
+                </div>
+                <label for="id_category">Game:</label> {{ form.category }}<br>
+                <label for="id_tags">Tags (<a href="http://beta.cafeofbrokendreams.com:8000/post/tagging-faq/" target="_blank">FAQ</a>)</label> {{ form.tags }}<br>
+                <label for="id_bulletin">Make this a Temporary Bulletin:</label> {{ form.bulletin }}
+                <br>
+                <input type="submit" value="Submit" /> 
+            </form>
+        </div>
+    <h1 style="display: block; text-align: center;">{% if cat %}{{ cat }}{% elif tag %}#{{ tag }}{% endif %}</h1>
+    {% if bulletin and bulletin.was_published_recently %}
+    {% with bulletin as post %}
+    <div id="bullet">
+    <div class="post">
+        <h1><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h1><br>
+        <p>{{ post.body|read_more:post.get_absolute_url|safe }}</p>
+        <br />
+        <div class="byline">
+            <a href="/game/{{ post.category.abv }}" title="{{ post.category }} posts">{{ post.category.name }}</a>
+        </div>
+    </div><!-- post -->
+</div><!-- bullet -->
+    {% endwith %}
+    {% endif %}
+
+    {% if posts %}
+        {% for post in posts %}
+        {% if not post.bulletin %}
+            <div class="post">
+                <h1><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+                <h5 class="pubdate">{{ post.pub_date|naturaltime }}</h5>
+                <p>{{ post.body|safe|read_more:post.get_absolute_url }}</p>
+                <br />
+                <div class="byline">
+                    {% if post.category %}<a href="/game/{{ post.category.abv }}" title="{{ post.category }} posts"><img src="/media/{{ post.category.icon }}" /></a> {% endif %}<a href="/user/{{ post.author.id }}" title="{{ post.author.get_profile.handle }}'s User Page"><img src="{{ post.author.get_profile.avatarM }}" /></a>
+                </div>
+                <span class="tags">{% tags_for_object post as tags %}{% for tag in tags %}<a href="/tag/{{ tag.slug }}">#{{ tag }}</a> {% endfor %}</span>
+            </div><!-- post -->
+
+            {% with post.get_latest_comment as comment %}
+                {% if comment %}
+                    <div class="onecomment">
+                        <a href="/user/{{ comment.user.id }}" title="{{ comment.user.get_profile.handle }}'s User Page"><img src="{{ comment.user.get_profile.avatar }}" alt="{{ comment.user.get_profile.handle }}" /></a> {{ comment.user.get_profile.handle }}<br>
+                        <p>{{ comment.comment|safe|truncatechars:140 }}</p>
+                        <a href="{{ post.get_absolute_url }}" title="Comment" />comment</a>
+                    </div><!-- oncecomment -->
+                {% else %}
+                <div class="onecomment">
+                    <h6>Nobody has said anything about this.</h6>
+                    <a href="{{ post.get_absolute_url }}" title="Comment" />comment</a>
+                </div>
+                {% endif %}
+                {% endwith %}
+        {% endif %}
+        {% endfor %}
+        <div id="pagination">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>There is either no news or doc is fixing something. "Fixing".</p>
+    {% endif %}
+</div>
+{% endblock content %}

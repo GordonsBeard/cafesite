@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon"/>
+        <link rel="stylesheet" href="{% static "css/reset.css" %}" />
+        <link rel="stylesheet" href="{% static "css/layout.css" %}" />
+        <link rel="stylesheet" href="{% static "css/tags.css" %}" />
+        {% block head%}{% endblock head %}
+        <script type="text/javascript" src="{% static "js/jquery-1.9.1.min.js" %}"></script>
+
+        <title>Cafe of Broken Dreams</title>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                    $('.navblip').click(function(){
+                        $(this).toggleClass("expanded")
+                        });
+                    $('#taglink').click(function(){
+                        $('#tags').slideToggle();
+                        });
+                    $('#gamelink').click(function(){
+                        $('#games').slideToggle();
+                        });
+                    $('#postlink').click(function(){
+                        $('#newpost').slideToggle();
+                        $('#postlink').toggleClass("expanded");
+                        });
+                     });
+        </script>
+    </head>
+
+    <body{% if cat %} style="background-image:url('/media/{{ cat.icon }}');"{% endif %}>
+        <div class="userbar">
+            <span class="title"><a href="/" title="Homepage">Cafe of Broken Dreams</a> v<a href="{% static "changelog.txt" %}" title="Changelog">0.8.3</a></span>
+            {% if user.is_authenticated %}<p>Logged in as: <a href="{{ user.get_profile.url }}" title="{{ user.get_profile.handle }}'s Steam Page" >{{ user.get_profile.handle }}</a> (<a href="/logout">logout</a>){% else %}<a href="/openid/login">Log In</a>{% endif %}
+        </div><!-- userbar -->
+
+        <div class="navigation">
+            <div class="navbar">
+                <div class="nav"><a href="/" class="navblip" title="Home Base!">~/ home</a></div>
+                <div class="nav"><a href="#" class="navblip"  id="gamelink" title="MURDER-SIMULATORS">@ games</a></div>
+                <div class="nav"><a href="/server" class="navblip"  title="Daycares">: servers</a></div>
+                <div class="nav"><a href="/comments" class="navblip"  title="Chatter">:U comments</a></div>
+                <div class="nav"><a href="#" id="taglink" class="navblip"  title="Just like twitter(tm)(r)(c)"># tags</a></div>
+                {% block navbar %}
+                {% endblock navbar %}
+            </div><!-- navbar -->
+
+            <div class="gamebar" id="games">
+                {% for game in categories %}<div class="game" style="background-image:url('/media/{{ game.icon }}');"><a href="/game/{{ game.abv }}" title="Talk about {{ game }}" class="game">{{ game|truncatechars:23 }}</a></div>
+                {% endfor %}
+            </div><!-- gamebar -->
+
+            <div class="tagbar" id="tags">
+            {% for tag in taglist %}    <div class="tag"><a href="/tag/{{ tag.slug }}">#{{ tag }}</a></div>
+            {% endfor %}</div><!-- tagbar -->
+
+        </div><!-- navigation -->
+
+        <div id="content">
+            {% block content %}{% endblock content %}
+        </div><!-- content -->
+
+        <div id="footer">
+            <a href="http://steampowered.com" title="Powered by Steam">Powered by Steam</a> + <a href="http://steamcommunity.com/groups/cafeofbrokendreams" title="Cafe of Broken Dreams Steam Group">Cafe of Broken Dreams</a> est. 2009
+        </div><!-- footer -->
+        <div class="warning">this site is under actie development. things will break. data will be lost</div>
+    </body>
+</html>

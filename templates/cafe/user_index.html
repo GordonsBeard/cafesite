@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% load comments %}
+
+{% block content %}
+<div class="profilepic">
+    <a href="{{ cafeuser.get_profile.url }}" title="{{ cafeuser.get_profile.handle }}'s Steam Page"><img src="{{ cafeuser.get_profile.avatarL }}" title="{{ cafeuser.get_profile.handle }}" /></a>
+    <h1>{{ cafeuser.get_profile.handle }}</h1>
+    <ul class="userpick">
+        <li><a href="posts" title="{{ cafeuser.get_profile.handle }}'s Posts">POSTS</a><br>{{ cafeuser.get_profile.get_postcount }}</li>
+        <li><a href="comments" title="{{ cafeuser.get_profile.handle }}'s Comments">COMMENTS</a><br>{{ cafeuser.get_profile.get_commentcount }}</li>
+    </ul>
+
+</div>
+<div id="left">
+    <h1>Recent Posts</h1>
+    {% if posts %}
+    {% for post in posts %}
+        <div class="post">
+            <h3><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h3><br>
+            <br />
+            {% get_comment_count for post as comcount %}
+            <div class="byline">
+                <strong>{{ comcount }} comment{{ comcount|pluralize }}</strong> <a href="/game/{{ post.category.abv }}" title="{{ post.category.name }} Page">{{ post.category.name }}</a>
+            </div><!-- byline -->
+        </div><!-- post -->
+    {% endfor %}
+    {% else %}
+    No news posts from this user.
+    {% endif %}
+</div><!-- left -->
+<div id="right">
+    <h1>Recent Comments</h1>
+    {% if comments %}
+    {% for comment in comments %}
+        <div class="onecomment">
+            <a href="{{ comment.get_absolute_url }}"> {{ comment.content_object.title }}</a><br>
+            {{ comment.comment|truncatewords:140|safe }}
+        </div>
+    {% endfor %}
+    {% else %}
+    No comments from this user.
+    {% endif %}
+</div><!-- right -->
+{% endblock content%}

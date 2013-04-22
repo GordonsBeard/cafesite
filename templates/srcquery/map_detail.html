@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block head %}<link rel="stylesheet" href="{% static "css/srcquery.css" %}" />{% endblock head %}
+
+{% block content %}
+Mapname: {{ map }}<br>
+Is Installed: {{ installed }}<br>
+Is FastDL Hosted: {{ fastdl }}<br>
+{% endblock content %}

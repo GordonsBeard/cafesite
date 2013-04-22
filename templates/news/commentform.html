@@ -1,0 +1,25 @@
+                {% if next %}
+                    <div>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div>
+                {% endif %}
+                
+                {% for field in form %}
+                    {% if field.is_hidden %}
+                        <div>{{ field }}</div>
+                    {% else %}
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <p>
+                    <label for="id_comment">Comment</label> {{ form.comment }}
+                </p>
+                <p style="display:none;">
+                    <label for="id_honeypot">If you enter anything in this field your comment will be treated as spam</label> <input type="text" name="honeypot" id="id_honeypot" />
+                </p>                        
+                <p class="submit">
+                    <input type="submit" name="post" class="submit-post" value="Post" />
+                    <input type="submit" name="preview" class="submit-preview" value="Preview" />
+                </p>

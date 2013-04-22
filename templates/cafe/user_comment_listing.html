@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% load comments %}
+
+{% block content %}
+<div id="news">
+    {% if posts %}
+        {% for comment in posts %}
+        <a href="{{ comment.content_object.get_absolute_url }}" title="{{ comment.content_object.title }}">{{ comment.content_object.title }}</h1></a>
+            <div class="onecomment">
+                <a href="/user/{{ comment.user.id }}" title="{{ comment.user.get_profile.handle }}'s User Page"><img src="{{ comment.user.get_profile.avatar }}" alt="{{ comment.user.get_profile.handle }}" /></a> {{ comment.user.get_profile.handle }}<br>
+                <p>{{ comment.comment|safe }}</p>
+            </div><!-- oncecomment -->
+            <br>
+            <br>
+        {% endfor %}
+    <div id="pagination">
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+        {% endif %}
+    </div>
+    {% else %}
+        <p>There is either no news or doc is fixing something. "Fixing".</p>
+    {% endif %}
+</div>
+{% endblock content %}

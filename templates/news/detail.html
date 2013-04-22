@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% load comments %}
+{% block head %}<script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>{% endblock head %}
+{% block content %}
+    {% include "news/single_post.html" %}
+
+    {% get_comment_list for post as comment_list%}
+    {% for comment in comment_list %}
+    <div class="onecomment" id="c{{ comment.id }}">
+        <div class="commenterav">
+            <a href="/user/{{ comment.user.id }}"><img src="{{ comment.user.get_profile.avatarM }}" /></a>
+        </div>
+
+        <div class="commentcontent">
+            <span class="name"><a href="/user/{{ comment.user.id }}">{{ comment.user.get_profile.handle }}</a></span>
+            {{ comment.comment|safe|linebreaks }}
+        </div>
+
+        <div class="commentcontrols">
+            {% if comment.user.id == user.id %}<a href="/comments/delete/{{ comment.id }}">Delete Comment</a> <a href="#">Edit Comment</a>{% endif %}<a style="clear: both;" href="{{ comment.get_absolute_url }}">Link</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        {% get_comment_form for post as form %}
+        <form action="{% comment_form_target %}" method="post">{% csrf_token %}
+            {% include "news/commentform.html" %}
+        </form>
+    {% endif %}
+{% endblock content %}

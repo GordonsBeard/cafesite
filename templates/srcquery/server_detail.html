@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block head %}<link rel="stylesheet" href="{% static "css/srcquery.css" %}" />{% endblock head %}
+
+{% block content %}
+{% if info %}
+<div class="serverbox">
+    <h2 class="srvhead">{{ server }}</h2>
+    <pre class="motd">{{ motd }}</pre>
+    <div class="info">
+        <h2 class="srvhead">Server Info</h2>
+        {% for k, v in info.items %}<p><strong>{{ k }}</strong>: {{ v }}{% endfor %}
+    </div>
+    <div class="players">
+    <h2 class="srvhead">Players</h2>
+    {% for player in playerlist %}<p><strong>{{ player.name }}</strong> {{ player.kills }}{% endfor %}
+    </div>
+    <h2 class="srvhead">Rules</h2>
+    <div class="rules">
+    {% for k, v in rules.items %}<p><strong>{{ k }}</strong>: {{ v }}{% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock content%}

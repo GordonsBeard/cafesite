@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+    Logged in!<br>
+    user: {{ user }}<br>
+    username: {{ user.username }}<br>
+    email: {{ user.email }}<br>
+    <a href="/logout">logout</a>
+{% else %}
+    <a href="/openid/login">Please log in.</a>
+{% endif %}

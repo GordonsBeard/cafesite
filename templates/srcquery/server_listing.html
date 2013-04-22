@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+
+{% block head %}<link rel="stylesheet" href="{% static "css/srcquery.css" %}" />{% endblock head %}
+
+{% block content %}
+<div class="serverbox">
+{% for server in server_list %}
+    <div class="srvlisting">
+        <a class="srvbut" href="{{ server.get_absolute_url}}">{{ server }}</a><a class="steamjoin" href="steam://connect/{{ server.address }}:{{ server.port }}">{{ server.address }}:{{ server.port }}</a>
+    </div>
+{% endfor %}
+</div>
+{% endblock content%}

@@ -1,0 +1,13 @@
+{% load comments %}
+{% load humanize %}
+{% load tagging_tags %}
+            <div class="post">
+                <h1><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+                <h5 class="pubdate">{{ post.pub_date|naturaltime }}</h5>
+                <p>{{ post.body|safe }}</p>
+                <br />
+                <div class="byline">
+                    {% if post.category %}<a href="/game/{{ post.category.abv }}" title="{{ post.category }} posts"><img src="/media/{{ post.category.icon }}" /></a> {% endif %}<a href="/user/{{ post.author.id }}" title="{{ post.author.get_profile.handle }}'s User Page"><img src="{{ post.author.get_profile.avatarM }}" /></a>
+                </div>
+                <span class="tags">{% tags_for_object post as tags %}{% for tag in tags %}<a href="/tag/{{ tag.slug }}">#{{ tag }}</a> {% endfor %}</span>
+            </div><!-- post -->

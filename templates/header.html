@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block header %}
+{% if user.is_authenticated %}
+Logged in!<br>
+user: {{ user.profile.handle }}<br>
+username: {{user.username}}<br>
+<br>
+<a href="/logout">logout</a>
+{% else %}
+<a href="/openid/login">Please log in.</a>
+{% endif %}
+
+{% endblock header %}

@@ -1,0 +1,99 @@
+body{
+    font-size: 14px;
+    font-family: Arial, Verdana, sans-serif;
+    text-align: center;
+    line-height: 130%;
+    background-position: 25px 25px;
+    background-repeat: no-repeat;
+    background-color: #986F5C;
+    line-height: 120%;
+}
+h1{
+    font-size: 28px;
+    font-weight: bold;
+    display: block;
+    line-height: 150%;
+}
+
+h2{
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    line-height: 140%;
+}
+
+
+h3{
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    line-height: 120%;
+}
+
+h4{
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    line-height: 110%;
+}
+
+h5.pubdate { margin-bottom: 1em; }
+
+.post p{
+    line-height: 130%;
+}
+
+.post ul{
+    list-style-type: disc;
+    margin-left: 2em;
+}
+
+.post ol{
+    list-style-type: decimal;
+    margin-left: 2em;
+}
+
+.post ul li, .post ol li{
+    line-height: 140%;
+    margin-left: 1em;
+    padding-bottom: .25em;
+}
+
+.code {
+    display: block;
+    margin-left: 2em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    color: white;
+    background-color: #3c3c3c;
+    padding: .5em;
+    font-family: monospace;
+    line-height: 120%;
+    font-size: 14px;
+}
+
+.code a{
+    color: white;
+    text-decoration: none;
+}
+
+pre { font-family: monospace; }
+
+blockquote{
+    background-color: #f1f1f1;
+    line-height: 130%;
+    padding: 1em 2em 1em 1em;
+}
+
+.spoiler {
+    background-color: black;
+    padding-left: .5em;
+    padding-right: .5em;
+    color: black;
+    display: inline-block;
+}
+
+.spoiler:hover { color: white; }
+
+strong { font-weight: bold; }
+

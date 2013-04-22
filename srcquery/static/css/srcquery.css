@@ -1,0 +1,93 @@
+/* ~ SRCQuery CSS ~ */
+
+
+
+h2.srvhead{
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+    line-height: 130%;
+    text-decoration: underline;
+    display: block;
+    text-align: center;
+}
+
+.serverbox{
+    width: 800px;
+    background-color: white;
+    font-size: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.srvlisting{
+    display: block;
+}
+
+.srvlisting:hover{
+    background-color: #373331;
+    color: white;
+}
+.srvlisting:hover>a{
+    background-color: #373331;
+    color: white;
+}
+
+a.srvbut{
+    display: inline-block;
+    margin: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+    font-size: 20px;
+    text-decoration: underline;
+    vertical-align: middle;
+}
+
+a.steamjoin{
+    background-image: url('../img/steam_icon.gif');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+.serverblock{
+    background-color: white;
+}
+
+.motd{
+    background-color: #c1c1c1;
+    font-family: Courier, monospace;
+    font-size: 14px;
+    line-height: 120%;
+    margin: 1em;
+    padding: .5em;
+}
+
+.info{
+    width: 380px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+}
+
+.players{
+    padding: 5px;
+    vertical-align: top;
+    width: 390px;
+    display: inline-block;
+}
+
+.rules{
+    padding: 5px;
+    vertical-align: top;
+    width: 780px;
+    height: 350px;
+    display: inline-block;
+    overflow: auto;
+    font-family: Courier, monospace;
+    background-color: #252525;
+    font-size: 12px;
+    color: white;
+}

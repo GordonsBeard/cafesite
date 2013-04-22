@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load post_filters %}
+{% load humanize %}
+{% load tagging_tags %}
+
+{% block head %}<script type="text/javascript" src="{% static "js/msdropdown/jquery.dd.min.js" %}"></script>
+        {{ form.media }}{% endblock head %}
+
+{% load comments %}
+
+{% block navbar %}{% if perms.news.add_newspost and not cat and not tag %}<div class="nav"><a href="#" id="postlink" class="navblip" title="Make a Post! Show them all!">+ post</a></div>{% endif %}{% endblock navbar %}
+
+{% block content %}
+<div id="news">
+    <div id="newpost" class="post" {% if form.errors %} style="display: block;"{% else %}style="display:none;"{% endif %}>
+            {% for error in form.errors %}<strong>{{ form.error }}</strong>{% endfor %}
+            <form action="newpost/" method="post">{% csrf_token %}
+                {{ form.title }}
+                {% if form.title.errors %}<span class="error">You forgot a title!</span>{% endif %}
+                <br>
+                <br>
+                {{ form.body }}<br>
+                {% if form.body.errors %}<span class="error">You forgot... the body? How?</span>{% endif %}
+                <div class="posthints">
+                    <ul>
+                        <li>If you have a long post, put &lt;!--more--&gt; in the Source.</li>
+                        <li>Max width is 1024px, but you only have ~900px to play with.</li>
+                        <li>Don't steal shit. Reblog and source. SOURCE YOUR SHIT.</li>
+                    </ul>
+                </div>
+                <label for="id_category">Game:</label> {{ form.category }}<br>
+                {{ form.category.errors }}
+                <label for="id_tags">Tags (<a href="http://beta.cafeofbrokendreams.com:8000/post/tagging-faq/" target="_blank">FAQ</a>)</label> {{ form.tags }}<br>
+                <label for="id_bulletin">Make this a Temporary Bulletin:</label> {{ form.bulletin }}
+                <br>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    <h1 style="display: block; text-align: center;">{% if cat %}{{ cat }}{% elif tag %}#{{ tag }}{% endif %}</h1>
+    {% if posts %}
+        {% for post in posts %}
+        <div {% if post.bulletin %}class="bullet{% if not post.was_published_recently %}_old{% endif %}"{% elif post.said %}class="blurb"{% else %}class="post"{% endif%} {% if post.category and not post.bulletin %}style="background-image:url('/media/{{ post.category.icon }}');"{% endif %}>
+            <div class="phead">
+                <a class="title" href="{{ post.get_absolute_url }}" title="{{ post.title }}">{% if post.category and post.category.abv != 'cafe' %}<span class="cat">{{ post.category.abv }}</span> // {% endif %}{{ post.title }}</a>
+            </div>
+            <div class="pbody">
+                {% if not post.category or post.category.abv == 'cafe' %}
+                <span class="pubdate">posted {{ post.pub_date|naturaltime }}</span>{% if post.category %}<span class="game">- <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></span>{% endif %}
+                {% if post.user %}{{ post.pub_date|naturalday }} <img src="{{ post.user.get_profile.avatar }}"> &quot;{{ post.said }}&quot;{% elif post.who %}<em>{{ post.pub_date|naturalday }}</em> <u>{{ post.who }}</u> &quot;{{ post.said }}&quot;{% else %}{{ post.body|safe|read_more:post.get_absolute_url }}{% endif %}
+                {% endif %}
+            </div>
+            {% if not post.category or post.category.abv == 'cafe' %}
+            <div class="postfoot">
+                <span class="auth"><a href="/user/{{ post.author.id }}" title="{{ post.author.get_profile.handle }}'s User Page"><img src="{{ post.author.get_profile.avatar }}" /></a></span>
+                <span class="tags">{% tags_for_object post as tags %}{% for tag in tags %}<a href="/tag/{{ tag.slug }}">#{{ tag }}</a> {% endfor %}</span>
+            </div>
+            {% endif %}
+            {% if not post.category or post.category.abv == 'cafe' %}
+                {% with post.get_latest_comment as comment %}
+                    {% if comment %}
+                        <div class="lastword">
+                            <a class="comav" href="{{ comment.get_absolute_url }}"><img src="{{ comment.user.get_profile.avatar }}" alt="{{ comment.user.get_profile.handle }}" /></a>
+                            <span class="comquip">{{ comment.comment|safe|truncatewords:25 }}</span>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            {% else %}
+                {% get_comment_count for post as comcount %}
+                    {% if comcount %}
+                    <span class="minicomlink"><a href="{{ post.get_latest_comment.get_absolute_url }}">{{ comcount }} comment{{ comcount|pluralize }}</a></span>
+                    {% endif %}
+            {% endif %}
+        </div><!-- post -->
+        {% endfor %}
+        <div id="pagination">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>There is either no news or doc is fixing something. "Fixing".</p>
+    {% endif %}
+</div>
+<div id="sidebar">
+    <div class="serverlist">
+        <h1 class="title">Servers</h1>
+        <ul>
+            <li>will go here</li>
+        </ul>
+    </div>
+
+    <div class="comments">
+        <h1 class="title">Latest Comments</h1>
+        <ul>
+            <li><span class="who">CBAG</span> <span class="what">[THIS KEYBOARD] MUST BE WHAT IT SOUNDS LIKE WHEN ROBOTS GIVE HANDJOBS</span></li>
+        </ul>
+    </div>
+
+    <div class="maps">
+        <h1 class="title">Newest Maps</h1>
+        <ul>
+            <li><span class="mapname">be_nat20_a0</span> by <span class="mapwho">A Whole Clan of Johnnies</span></li>
+        </ul>
+    </div>
+</div>
+{% endblock content %}

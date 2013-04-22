@@ -1,0 +1,13 @@
+{% if person %}
+    <h1>User: {{ name }} on {{ channel }}</h1>
+    <ul>
+    <li> Total lines: {{ person.totallines }}
+    <li> Talk lines: {{ person.talklines }}
+    <li> Action lines: {{ person.actionlines }}
+    <li> IRC lines: {{ person.irclines }}
+    <li> Last line: {{ person.lastline }}
+    <li> Last action: {{ person.lastaction }}
+    </ul>
+{% else %}
+    <p>No stats available for {{ user }} on {{ channel }}</p>
+{% endif %}

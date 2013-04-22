@@ -1,0 +1,368 @@
+/* Main Body */
+#news { width: 750px; float: left; }
+#sidebar { width: 270px; float: right; } 
+
+/* Top Bars */
+
+.expanded{
+    background-color: #445A77;
+}
+
+.collapsed{
+    background-color: #66493B;
+}
+
+/* Userbar */
+.userbar{
+    text-align: right;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #71808F;
+    padding-top: 25px;
+}
+
+.navbar{ background-color: #C6B379; border-bottom: 1px solid black; padding-top: 5px; padding-bottom: 5px; border-left: 1px solid black; border-right: 1px solid black; }
+
+#postlink{ background-color: #F0C000; color: black; border: 2px solid black; }
+
+.warning{
+    font-variant: small-caps;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    color: white;
+    background-color: black;
+}
+.userbar span.title{
+    float: left;
+    font-weight: bold;
+}
+
+.navbar, .userbar { max-width: 1024px;  margin-left: auto; margin-right: auto; }
+
+div.tag{
+    margin: 5px;
+    display: inline-block;
+    color: black;
+}
+div.nav{
+    display: inline-block;
+    background-color: #66493B;
+    min-width: 125px;
+    font-size: 16px;
+}
+
+div.nav a{
+    padding: 1em;
+    color: white;
+    font-variant: small-caps;
+    display: block;
+}
+
+div.tag a{
+    padding: .5em;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.tagbar, .gamebar { background-color: #C6B379; max-width: 1024px; margin-left: auto; margin-right: auto; border-left: 1px solid black; border-right: 1px solid black; display: none; }
+.tagbar{ border-bottom: 1px solid black; }
+
+div.game {
+    margin: 5px;
+    height: 40px;
+    width: 150px;
+    background-color: #66493B;
+    display: inline-block;
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+    padding-left: 70px;
+    text-align: left;
+}
+
+div.game a { 
+    display: block;
+    line-height: 40px;
+    color: white; 
+    text-decoration: none; 
+}
+
+
+.posttoggle{ color: black; font-weight: bold; font-size: 16px; display: block; text-align: center; border: 1px dotted black;  background-color: #C6B379; padding: 1em; width: 50%; margin: .25em; margin-left: auto; margin-right: auto; }
+/* Footer */
+#pagination{
+    clear: both;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    text-align: right;
+}
+
+#footer{
+    clear: both;
+    font-size: 10px;
+    padding: 5px;
+}
+
+#footer a, .userbar a, .navbar a{
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+/* Content */
+#content{
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#right{
+    display: inline;
+    width: 50%;
+    float: right;
+}
+
+#left{
+    display: inline;
+    width: 45%;
+    float: left;
+}
+
+/* Bulletin */
+.bullet{
+    background-color: #FB524F;
+    color: white;
+    width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ba3435;
+}
+
+.bullet>.phead{
+    background-color: #BA3435;
+    border-bottom: 0;
+    text-align: center;
+}
+.blurb{ background-color: transparent; margin: 1em auto; width: 900px; }
+.blurb>.pbody{ color: white; }
+.blurb>.pbody>img{ vertical-align: middle; }
+.blurb>.phead, .blurb>.postfoot, .blurb>.pbody>.pubdate{ display: none; }
+
+.bullet>.phead>.title{ display: block; float: none; color: white;}
+.bullet>.phead>.auth{ display: none; }
+.bullet>.pbody{ text-align: center; }
+
+.bullet_old { border: none; width: 400px; margin: 0 auto; }
+.bullet_old>.phead{ font-weight: normal; font-style: italic; background-color: #414141; border: none; margin-bottom: 1em;}
+.bullet_old>.phead>.title{ color: #c1c1c1; }
+.bullet_old>.pbody{ display: none; }
+.bullet_old>.postfoot{ display: none; }
+/* News Posts - */
+
+.post, .minipost{ background-repeat: no-repeat; background-position: 100% 100%; }
+
+.post{
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid black;
+    margin-top: 5px;
+}
+
+.minipost{
+    overflow: hidden;
+    background-color: gray;
+    border: 1px solid #ccc;
+}
+
+/* Post Header */
+.phead{ 
+    background-color: white;
+    border-bottom: 1px 
+    display: block;
+    border-bottom: 1px solid black;
+    padding: 3px;
+    text-align: left;
+}
+
+.phead a.title {
+    color: black;
+    width: 725px;
+    clear: both;
+    padding: 5px;
+    overflow: hidden;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.phead a>span.cat { font-variant: small-caps; }
+
+
+span.auth {float: right; display: block; }
+
+.pbody { padding-left: 1em; padding-right: 1em; }
+
+/* Post Footer */
+.postfoot{ clear: both; height: 32px; }
+
+span.tags { display: inline-block; font-size: 12px; }
+span.tags a { margin-left: .5em; line-height: 32px; text-decoration: none; font-weight: bold; color: black; }
+span.tags a:hover { background-color: #c1c1c1; }
+
+span.game{
+    display: inline-block;
+}
+span.pubdate, span.game{
+    font-style: italic;
+    font-size: smaller;
+    margin-bottom: 2em;
+    display: inline-block;
+}
+
+.comquip {color: white; } 
+.lastword { width: 100%; background-color: #333;  text-align: left; border-top: 1px solid black; height: 40px; overflow: hidden; } 
+.comav { padding: 3px; float: left; }
+.minicomlink { display: block; color: white; background-color: #333; }
+.minicomlink a { color: white; padding: 3px; font-size: 12px; text-decoration: none; }
+
+/* New News Post */
+input#id_title{ font-size: 18px; font-weight: bold; width: 735px; margin:2px; }
+.secret{
+    padding: 1em;
+    margin: 1em;background-color: #BD3A3A; color: white; font-weight: bold; font-size: larger;
+}
+
+.floatbyline{ display: block; float: right; } 
+
+.byline{
+    display: block;
+    text-align: right;
+    clear: both;
+}
+
+.floatbyline img, .byline img{
+    width: 66px;
+    height: 66px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #373331;
+}
+
+.onecomment {
+    background-color: #C6B379;
+    border-bottom: 1px solid black;
+    padding: .25em;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.onecomment img{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.commenterav{
+    float: left;
+}
+
+.commentcontent{
+    width: 940px; 
+    margin-left: 1em;
+}
+
+.commentcontent .name { display: block; height: 70px; padding-left: 5em;}
+.commentcontent .name a{text-decoration: none; color: black; font-weight: bold; font-size: 14px; border-bottom: 1px solid black; }
+
+.commentcontrols{
+    clear: both;
+    text-align: right;
+}
+
+.commentcontrols a { color: black; text-decoration: none; font-weight: bold; margin-right: .25em; }
+
+/* Post Comment */
+p.comment {
+    text-align: left;
+    padding-left: 5px;
+    padding-top: 5px;
+    line-height: 120%;
+    display: block;
+    font-size: 18px;
+    border-bottom: 1px dotted black;
+    margin-bottom: 15px;
+}
+
+.post strong{
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.post h1{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.error { background-color: #FB524F; display: block; color: white; padding: .25em; font-variant: small-caps; width: 400px; margin-left: 80px; }
+.posthints { font-size: 12px; background-color: #e3e3e3; width: 400px; }
+.posthints ul li { }
+/* Userpage */
+.profilepic{
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    display: block;
+    padding: 10px;
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: #373331;
+}
+
+.profilepic img{
+    border: 3px double black;
+}
+
+ul.userpick {
+    margin: 2em;
+    clear:both;
+}
+
+ul.userpick li{
+    display: inline-block;
+    font-size: 18px;
+
+}
+
+ul.userpick li{
+    padding: .5em;
+    border: 3px solid white;
+}
+
+ul.userpick li a{
+    color: orange;
+    font-size: 18px;
+    font-weight: bold;
+    font-variant: smallcaps;
+    text-decoration: none;
+}
+
+ul.userpick li:hover{
+    background-color: orange;
+    border: 3px solid orange;
+    color: white;
+}
+
+ul.userpick li:hover a{
+    background-color: orange;
+    color: white;
+}
+
+

@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% load post_filters %}
+{% load humanize %}
+{% load tagging_tags %}
+
+{% block head %}{% endblock head %}
+
+{% load comments %}
+
+{% block navbar %}{% endblock navbar %}
+
+{% block content %}
+<div id="news">
+    <h1 style="display: block; text-align: center;">{% if cat %}{{ cat }} ( {% for x in cattags %}#{{ x }} {% endfor %}){% elif tag %}#{{ tag }}{% endif %}</h1>
+
+    {% if posts %}
+        {% if taggedposts %}
+        <h2>Related posts: </h2>
+        {% for post in taggedposts %}
+            <div class="post">
+                <span class="floatbyline"><a href="/user/{{ post.author.id }}" title="{{ post.author.get_profile.handle }}'s User Page"><img src="{{ post.author.get_profile.avatarM }}" /></a></span>
+                <h1><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+                <h5 class="pubdate">{{ post.pub_date|naturaltime }}</h5>
+            </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Posts filed under: {{ cat.name }}</h2>
+        {% for post in posts %}
+        {% if not post.bulletin %}
+            <div class="post">
+                <h1><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+                <h5 class="pubdate">{{ post.pub_date|naturaltime }}</h5>
+                <p>{{ post.body|safe|read_more:post.get_absolute_url }}</p>
+                <br />
+                <div class="byline">
+                    {% if post.category %}<a href="/game/{{ post.category.abv }}" title="{{ post.category }} posts"><img src="/media/{{ post.category.icon }}" /></a> {% endif %}<a href="/user/{{ post.author.id }}" title="{{ post.author.get_profile.handle }}'s User Page"><img src="{{ post.author.get_profile.avatarM }}" /></a>
+                </div>
+                <span class="tags">{% tags_for_object post as tags %}{% for tag in tags %}<a href="/tag/{{ tag.slug }}">#{{ tag }}</a> {% endfor %}</span>
+            </div><!-- post -->
+
+            {% with post.get_latest_comment as comment %}
+                {% if comment %}
+                    <div class="onecomment">
+                        <a href="/user/{{ comment.user.id }}" title="{{ comment.user.get_profile.handle }}'s User Page"><img src="{{ comment.user.get_profile.avatar }}" alt="{{ comment.user.get_profile.handle }}" /></a> {{ comment.user.get_profile.handle }}<br>
+                        <p>{{ comment.comment|safe|truncatechars:140 }}</p>
+                        <a href="{{ post.get_absolute_url }}" title="Comment" />comment</a>
+                    </div><!-- oncecomment -->
+                {% else %}
+                <div class="onecomment">
+                    <h6>Nobody has said anything about this.</h6>
+                    <a href="{{ post.get_absolute_url }}" title="Comment" />comment</a>
+                </div>
+                {% endif %}
+                {% endwith %}
+        {% endif %}
+        {% endfor %}
+        <div id="pagination">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>There is either no news or doc is fixing something. "Fixing".</p>
+    {% endif %}
+</div>
+{% endblock content %}
