@@ -20,6 +20,7 @@ What is it using?
 -----------------
 This will get updated when I remember more of what I've stolen.
 
+* [Django 1.4.5](https://www.djangoproject.com/)
 * [django-tagging](https://github.com/brosner/django-tagging)
 * [django-evolution](https://code.google.com/p/django-evolution/)
 * [django-ckeditor](https://github.com/shaunsephton/django-ckeditor)
