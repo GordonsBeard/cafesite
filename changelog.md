@@ -1,13 +1,10 @@
 Version 0.8.3 (3/25/13)
 -------------
 + Added proper support for jump cuts.
-    Put <!--more--> somewhere in your post where you'd like to have a "click
-    here to read more..." style of link. So we don't clutter up the main page.
 
 Version 0.8.2 (3/23/13)
 -------------
 + Added top tags to navigation bar
-
 + Categories will now show top categories, decending in # of posts.
 
 Version 0.8.1 (3/23/13)
@@ -17,8 +14,6 @@ Version 0.8.1 (3/23/13)
 Version 0.8 (3/23/13)
 -----------
 + Added tagging
-    Tags can be a simple comma or space delimited list.
-    Went back and tagged all needed newsposts.
 
 Version 0.7.2 (3/23/13)
 -------------
@@ -27,91 +22,61 @@ Version 0.7.2 (3/23/13)
 Version 0.7.1 (3/18/13)
 -------------
 + Changed internal usernames to be steamids
-
 + This allows for multiple people named the same thing on Steam
 
 Version 0.7 (3/17/13)
 -----------
 + Added simple server querying page
-
 + Tweaked the design of the navigation bar.
 
 Version 0.6.1 (3/15/13)
 -------------
 + Added ability to make post from front page.
-
 + Added jquery to the project.
-    I'm sorry world.
+    - I'm sorry world.
 
 Version 0.6 (3/15/13)
 -----------
 + Removed need to log into /admin/ to make news post
-
 + Fixed wrong username display in User Pages
-
 + Added Game Server support
-    Backend DB only, front pages coming later.
 
 Version 0.5 (2/24/13)
 -----------
 + Added support for News Bulletins
-    When 'bulletin' flag enabled, they will appear at the top of the page for
-    the next hour. They will not show up in any post listing, or shouldn't at
-    least.
-
 + Added secret word support
-    Define a secret word, and whoever says it will get rewarded.
-
 + Tweaked User page
-    Added links for Posts and Comments
-
 + Added Comments page
 
 Version 0.4 (2/23/13)
 -----------
 + Added WYSIWYG editor
-    File uploads available
 
 Version 0.3.3 (2/20/13)
 -------------
 + Added pagination to index
-
 + Split templates all up and shit.
-	You aren't going to notice any changes cauze THATS THE POINT.
 
 Version 0.3.2 (2/20/13)
 -------------
 + User pages
-	Displays recent posts and comments
-	/user/<id>
-	All user avatars now lead to user page
 
 Version 0.3.1 (2/20/13)
 -------------
 + User group addition
-	- Regular:
-	News:	Create/Edit
-
 + Database wipe.
-	whoops.
+    - Whoops.
 
 Version 0.3 (2/19/13)
 -----------
 + Category pages
-	Category icons will now link to a page listing nothing but posts from so and so category.
-	Cafe cup shown twice, first one is all posts, new icon later.
-
-+ Colors
++ Colors!
 
 Version 0.2.1 (2/18/13)
 -------------
 + Latest comment for news post shown on main page
-
 + Fixed Category abbreviations
 	Category abbreviations should not be anything but ascii, no more than 5 letters.
-	Category names can be just about whatever you want.
-	Icons should be no bigger than 60x60.
-	Transparent PNG/GIF.
 
 Version 0.2 (2/16/13)
 -----------
@@ -120,22 +85,6 @@ Version 0.2 (2/16/13)
 Version 0.1 (2/1/13)
 -----------
 + Logging in via Steam
-
 + Blog posting
-	Blog posting is still in raw HTML, so brush up on your HTML skills.
-
 + Category creation
-	Please keep icons to 60x60, transparent PNG or GIF.
-
 + User group creation
-	- Cool Kids: 	
-	News: 		Create/Delete/Edit
-	Cat:  		Create/Edit
-	Comments: 	Create/Delete/Edit/Moderate
-	Users:		Modify
-	UserProf:	Modify
-
-	- Patrons:		
-	News:		Create/Delete/Edit
-	Cat:		Create/Edit
-	Comment:	Create/Moderate
