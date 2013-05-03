@@ -57,7 +57,7 @@ class Maps(models.Model):
 
         """
         srcds_mngr = ManageServer.objects.get(server=self.server)
-        maploc = "{0}maps/{1}".format(srcds_mngr.installpath, self.name)
+        maploc = "{0}custom/cafe/maps/{1}".format(srcds_mngr.installpath, self.name)
         try:
             with open(maploc): return True
         except IOError:

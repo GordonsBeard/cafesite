@@ -26,7 +26,7 @@ class MissionAdmin(admin.ModelAdmin):
         for mission in queryset:
             if not mission.approved:
                 srcds_mgr = ManageServer.objects.get(server=mission.map.server)
-                missiondir = "{0}{1}".format(srcds_mgr.installpath, 'scripts/population/')
+                missiondir = "{0}{1}".format(srcds_mgr.installpath, 'custom/cafe/scripts/population/')
                 mvcall = "mv {2}{0} {1}".format(mission.pop, missiondir, settings.MEDIA_ROOT)
                 retcode = call(mvcall, shell=True)
                 mission.pop = "{0}{1}".format(missiondir, str(mission.pop).split('/')[1])
@@ -54,7 +54,7 @@ class MapAdmin(admin.ModelAdmin):
         for map in queryset:
             if not map.approved:
                 srcds_mgr = ManageServer.objects.get(server=map.server)
-                mapdir = "{0}{1}".format(srcds_mgr.installpath, 'maps/')
+                mapdir = "{0}{1}".format(srcds_mgr.installpath, 'custom/cafe/maps/')
                 mvcall = "mv {2}{0} {1}".format(map.bsp, mapdir, settings.MEDIA_ROOT)
                 retcode = call(mvcall, shell=True)
                 map.bsp = "{0}{1}".format(mapdir, str(map.bsp).split('/')[1])
@@ -83,7 +83,6 @@ class MapAdmin(admin.ModelAdmin):
                             fileloc = map.bsp
                     except IOError:
                         pass
-
 
                 if fileloc:
                     bzcall = "bzip2 -k {0}".format(fileloc)
